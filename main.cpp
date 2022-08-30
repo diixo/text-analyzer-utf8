@@ -838,6 +838,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
          {
             *pBuff = wch;
             pBuff++;
+            str_sz++;
             *pBuff = 0;
             pBuff = buff;
             {
