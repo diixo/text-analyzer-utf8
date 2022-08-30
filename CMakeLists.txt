@@ -1,13 +1,13 @@
 
 cmake_minimum_required (VERSION 3.1)
 
-project (text-cleaner-utf8-prj)
+project (text-analyzer-utf8-prj)
 
 # Set compiler flags and options. 
 if (MSVC) # MSVC compiler (Win32 only)
     # Display more warnings
     set (CMAKE_CXX_FLAGS "/W3")
-elseif (UNIX OR CMAKE_COMPILER_IS_GNUCXX) # Clang OR Gcc (Linux, Mac OS or Win32 with MingW)
+elseif (UNIX OR CMAKE_COMPILER_IS_GNUCXX) # Clang OR GCC (Linux, Mac OS or Win32 with MingW)
     # Enable C++11 and displays all warnings
     # C++ compiler flags
     set(CMAKE_CXX_STANDARD 14)
@@ -28,4 +28,4 @@ message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 
 set (SOURCE_EXE Main.cpp)
 
-add_executable (text-cleaner ${SOURCE_EXE})
+add_executable (text-analyzer ${SOURCE_EXE})

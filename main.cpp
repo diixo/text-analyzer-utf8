@@ -836,9 +836,10 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
 
          if (pBuff != buff)
          {
+            *pBuff = wch;
+            pBuff++;
             *pBuff = 0;
             pBuff = buff;
-
             {
                const wstring_t wstr(buff);
                assert(str_sz == wstr.size());
@@ -867,6 +868,19 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
             pBuff++;
             str_sz++;
          }
+      }
+   }
+
+   //////////////////////////////////////////////////////////////////////////
+   if (pBuff != buff)
+   {
+      *pBuff = 0;
+      pBuff = buff;
+      {
+         const wstring_t wstr(buff);
+         assert(str_sz == wstr.size());
+
+         processString(wstr, filterMap, ioMap, pOutputF);
       }
    }
 
