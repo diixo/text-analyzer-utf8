@@ -755,6 +755,17 @@ void report(
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
+
+void processString(const wchar_t* str, size_t str_sz)
+{
+   const wchar_t* p0 = str;
+
+   while (*p0)
+   {
+      p0++;
+   }
+}
+
 void processString(const wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap, std::map <wstring_t, size_t>& ioMap, FILE* filteredOut)
 {
    std::list <wstring_t> tokenList;
@@ -845,6 +856,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
                const wstring_t wstr(buff);
                assert(str_sz == wstr.size());
 
+               processString(buff, str_sz);
                processString(wstr, filterMap, ioMap, pOutputF);
             }
 
@@ -881,6 +893,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
          const wstring_t wstr(buff);
          assert(str_sz == wstr.size());
 
+         processString(buff, str_sz);
          processString(wstr, filterMap, ioMap, pOutputF);
       }
    }
