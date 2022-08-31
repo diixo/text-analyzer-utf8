@@ -388,12 +388,13 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
    {
       wstring_t& wstr = *it;
 
-      rtrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x005b\x005d\x003f\x002e\x002f");
-      ltrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x005b\x005d\x002b");
+      rtrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x003f\x002e\x002f");
+      ltrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x002b");
 
       //rtrim(wstr, L"\x0023\x0026\x0027\x0028\x0029\x002a\x002d\x002e\x002f\x003a\x003b\x003c\x003d\x003e\x003f\x005c\x007e\x00a9\x00ae\x005f");
       //ltrim(wstr, L"\x0023\x0026\x0027\x0028\x0029\x002a\x002d\x002f\x005c\x007e\x00a9\x00ae\x005f");
 
+      if (!wstr.empty())
       {
          bool skip = true;
 
@@ -756,21 +757,105 @@ void report(
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-void processString(const wchar_t* str, size_t str_sz)
+const wchar_t PUNCT[16] = { L'…', L',', L':', L'!', L'?', L'—', L'*', L'«', L'»', L';', L'"', L'&', L')', L'(', L'/', L'|' };
+
+const wchar_t ALLOWABLE[30] =
 {
-   const wchar_t* p0 = str;
+L'\n',
+L'\r',
+L'\t',
+L' ',
+L';',
+L'(',
+L')',
+L'{',
+L'}',
+L'[',
+L']',
+L'*',
+L',',
+L'!',
+L'?',
+L':',
+L'/',
+//L'+',
+L'"',
+L'=',
+L'*',
+L'&',
+L'#',
+L'|',
+
+L'“',
+L'”',
+L'…',
+//L'>',
+//L'<',
+L'—',
+L'\x00a0',
+L'«',
+L'»'
+};
+
+
+void splitString(const wchar_t* buff, size_t buff_sz, std::list<wstring_t>& words)
+{
+   const wstring_t wstr(buff);
+   assert(buff_sz == wstr.size());
+
+   const wchar_t* p0 = buff;
+   const wchar_t* p_new = buff;
+   size_t sz = 0;
+   const wstring_t STR_SEPARATOR(1, L';');
+
 
    while (*p0)
    {
-      p0++;
+      if (wcschr(ALLOWABLE, *p0))
+      {
+         if (sz > 0)
+         {
+            wstring_t s_new(p_new, sz);
+            rtrim(s_new, L".:");
+            if (!s_new.empty())
+            {
+               words.push_back(s_new);
+               if (s_new.size() != sz)
+               {
+                  words.push_back(STR_SEPARATOR);
+               }
+            }
+            else
+            {
+               words.push_back(STR_SEPARATOR);
+            }
+         }
+         if (wcschr(PUNCT, *p0))
+         {
+            words.push_back(wstring_t(1, *p0));
+         }
+         p_new = ++p0;
+         sz = 0;
+      }
+      else
+      {
+         sz++;
+         p0++;
+      }
+   }
+   if (!words.empty())
+   {
+      words.push_back(STR_SEPARATOR);
    }
 }
 
-void processString(const wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap, std::map <wstring_t, size_t>& ioMap, FILE* filteredOut)
+void processString(const wchar_t* buff, size_t buff_sz, const std::map <wstring_t, size_t>& filterMap, std::map <wstring_t, size_t>& ioMap, FILE* filteredOut)
 {
    std::list <wstring_t> tokenList;
 
-   wcstok(wstr, L"\x0020\x0021\x002c\x003b\x007c", tokenList);   // " !,;|"
+   splitString(buff, buff_sz, tokenList);
+
+   //wcstok(wstr, L"\x0020\x0021\x002c\x003b\x007c", tokenList);   // " !,;|"
 
    trimming(filterMap, tokenList);
 
@@ -800,6 +885,8 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
 {
    setlocale(LC_ALL, "Russian");
    //////////////////////////////////////////////////////////////////////////
+
+   std::list<wstring_t> words;
 
    const std::wstring filename_in = cstring_to_wstring(filepath);
 
@@ -853,11 +940,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
             *pBuff = 0;
             pBuff = buff;
             {
-               const wstring_t wstr(buff);
-               assert(str_sz == wstr.size());
-
-               processString(buff, str_sz);
-               processString(wstr, filterMap, ioMap, pOutputF);
+               processString(buff, str_sz, filterMap, ioMap, pOutputF);
             }
 
             str_sz = 0;
@@ -890,11 +973,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
       *pBuff = 0;
       pBuff = buff;
       {
-         const wstring_t wstr(buff);
-         assert(str_sz == wstr.size());
-
-         processString(buff, str_sz);
-         processString(wstr, filterMap, ioMap, pOutputF);
+         processString(buff, str_sz, filterMap, ioMap, pOutputF);
       }
    }
 
@@ -1051,7 +1130,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-cleaner [Version 47] (c) Diixo\n");
+      wprintf(L"Text-analyzer [Version 5 (c) Diixo\n");
       if (argc == 3)
       {
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
