@@ -54,17 +54,15 @@ const wchar_t eu_lower_ext[SZ] = {
    L'\x013e', L'\x0144', L'\x0146', L'\x014d', L'\x0151', L'\x0155', L'\x0161', L'\x016b', L'\x0171', L'\x0173', L'\x01b6'
 };
 
-const wchar_t PUNCT[15] = { L'…', L',', L':', L'!', L'—', L'*', L'«', L'»', L';', L'"', L'&', L')', L'(', L'/', L'|' };
+const wchar_t PUNCT[10] = { L'…', L',', L'!', L'—', L'«', L'»', L';', L'"', L'|', 
+   0 };
 
-const wchar_t ALLOWABLE[27] =
+const wchar_t ALLOWABLE[17] =
 {
-   L'\n',
-   L'\r',
-   L'\t',
+   L'\n', L'\r', L'\t',
    L' ',
-   L'…', L',', L':', L'!', L'—', L'*', L'«', L'»', L';', L'"', L'&',
-   L'(', L')', L'/', L'|', L'{', L'}', L'[', L']', L'“', L'”', L'#',
-   L'\x00a0'
+   L'…', L',', L'!', L'—', L'«', L'»', L';', L'"', L'|', L'“', L'”',
+   L'\x00a0', 0
 
    //L'+',
    //L'>',
@@ -791,6 +789,7 @@ void splitString(const wchar_t* buff, size_t buff_sz, std::list<wstring_t>& word
    const wchar_t* p_new = buff;
    size_t sz = 0;
    const wstring_t STR_SEPARATOR(1, L';');
+   const wstring_t Delim(L".:?");
 
 
    while (*p0)
@@ -800,7 +799,7 @@ void splitString(const wchar_t* buff, size_t buff_sz, std::list<wstring_t>& word
          if (sz > 0)
          {
             wstring_t s_new(p_new, sz);
-            rtrim(s_new, L".:?");
+            rtrim(s_new, Delim);
             if (!s_new.empty())
             {
                words.push_back(s_new);
@@ -825,6 +824,16 @@ void splitString(const wchar_t* buff, size_t buff_sz, std::list<wstring_t>& word
       {
          sz++;
          p0++;
+      }
+   }
+   if (p0 != p_new)
+   {
+      assert(sz > 0);
+      wstring_t s_new(p_new, sz);
+      rtrim(s_new, Delim);
+      if (!s_new.empty())
+      {
+         words.push_back(s_new);
       }
    }
    if (!words.empty())
@@ -1117,7 +1126,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 6 (c) Diixo\n");
+      wprintf(L"Text-analyzer [Version 7 (c) Diixo\n");
       if (argc == 3)
       {
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
