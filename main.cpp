@@ -779,11 +779,8 @@ void report(
 //////////////////////////////////////////////////////////////////////////
 
 
-void splitString(const wchar_t* buff, size_t buff_sz, std::list<wstring_t>& words)
+void splitString(const wchar_t* buff, std::list<wstring_t>& words)
 {
-   //const wstring_t wstr(buff);
-   //assert(buff_sz == wstr.size());
-
    const wchar_t* p0 = buff;
    const wchar_t* p_new = buff;
    size_t sz = 0;
@@ -847,10 +844,10 @@ void processString(const wchar_t* buff, size_t buff_sz, const std::map <wstring_
    std::list <wstring_t> tokenList;
 
    //wcstok(wstr, L"\x0020\x0021\x002c\x003b\x007c", tokenList);   // " !,;|"
-   splitString(buff, buff_sz, tokenList);
+   splitString(buff, tokenList);
 
-   const wstring_t wstr(buff);
-   assert(buff_sz == wstr.size());
+   //const wstring_t wstr(buff);
+   //assert(buff_sz == wstr.size());
 
 
    trimming(filterMap, tokenList);
@@ -1123,7 +1120,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 10 (c) Diixo\n");
+      wprintf(L"Text-analyzer [Version 11 (c) Diixo]\n");
       if (argc == 3)
       {
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
