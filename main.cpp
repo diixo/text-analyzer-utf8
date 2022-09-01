@@ -537,13 +537,11 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
                }
                else
                {
+                  //////////////////////////////////////////////////////////////////////////
                   auto check = [&filterMap, &tstr](const wchar_t* Delim)->int
                   {
                      std::list<std::wstring> tmpList;
                      wcstok(tstr, Delim, tmpList);
-                     //if (tmpList.size() == 1) return false;
-
-                     //const std::wstring trim_separator(L"-");
 
                      for (auto itt = tmpList.begin(); itt != tmpList.end(); )
                      {
@@ -562,7 +560,7 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
                      }
                      return (int)tmpList.empty();
                   };
-
+                  //////////////////////////////////////////////////////////////////////////
                   auto checkStrong = [&filterMap, &tstr](const wchar_t* Delim)->int
                   {
                      std::list<std::wstring> tmpList;
@@ -589,6 +587,7 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
                      }
                      return (int)tmpList.empty();
                   };
+                  //////////////////////////////////////////////////////////////////////////
 
                   int checkR = check(L"$~@_.()*?~%/\\");
 
@@ -782,8 +781,8 @@ void report(
 
 void splitString(const wchar_t* buff, size_t buff_sz, std::list<wstring_t>& words)
 {
-   const wstring_t wstr(buff);
-   assert(buff_sz == wstr.size());
+   //const wstring_t wstr(buff);
+   //assert(buff_sz == wstr.size());
 
    const wchar_t* p0 = buff;
    const wchar_t* p_new = buff;
@@ -826,6 +825,7 @@ void splitString(const wchar_t* buff, size_t buff_sz, std::list<wstring_t>& word
          p0++;
       }
    }
+   //////////////////////////////////////////////////////////////////////////
    if (p0 != p_new)
    {
       assert(sz > 0);
@@ -846,12 +846,12 @@ void processString(const wchar_t* buff, size_t buff_sz, const std::map <wstring_
 {
    std::list <wstring_t> tokenList;
 
+   //wcstok(wstr, L"\x0020\x0021\x002c\x003b\x007c", tokenList);   // " !,;|"
    splitString(buff, buff_sz, tokenList);
 
    const wstring_t wstr(buff);
    assert(buff_sz == wstr.size());
 
-   //wcstok(wstr, L"\x0020\x0021\x002c\x003b\x007c", tokenList);   // " !,;|"
 
    trimming(filterMap, tokenList);
 
@@ -930,9 +930,6 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
 
          if (pBuff != buff)
          {
-            //*pBuff = wch;
-            //pBuff++;
-            //str_sz++;
             *pBuff = 0;
             pBuff = buff;
             {
@@ -1126,7 +1123,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 9 (c) Diixo\n");
+      wprintf(L"Text-analyzer [Version 10 (c) Diixo\n");
       if (argc == 3)
       {
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
