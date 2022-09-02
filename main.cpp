@@ -54,15 +54,15 @@ const wchar_t eu_lower_ext[SZ] = {
    L'\x013e', L'\x0144', L'\x0146', L'\x014d', L'\x0151', L'\x0155', L'\x0161', L'\x016b', L'\x0171', L'\x0173', L'\x01b6'
 };
 
-const wchar_t PUNCT[12] = { L',', L'!', L'—', L';', L'\"', L'|', L'«', L'»', L'…', L'“', L'”',
+const wchar_t PUNCT[12] = { L',', L'!', L';', L'\"', L'|', 0x00ab, 0x00bb, 0x2014, 0x2026, 0x201c, 0x201d,
    0 };
 
 const wchar_t ALLOWABLE[17] =
 {
    L'\n', L'\r', L'\t',
    L' ',
-   L',', L'!', L'—', L';', L'\"', L'|', L'«', L'»', L'…', L'“', L'”',
-   L'\x00a0', 0
+   L',', L'!', L';', L'\"', L'|', 0x00ab, 0x00bb, 0x2014, 0x2026, 0x201c, 0x201d,
+   0x00a0, 0
 
    //L'+',
    //L'>',
@@ -1126,7 +1126,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 8 (c) Diixo\n");
+      wprintf(L"Text-analyzer [Version 9 (c) Diixo\n");
       if (argc == 3)
       {
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
