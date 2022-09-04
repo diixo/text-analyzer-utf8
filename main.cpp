@@ -572,17 +572,18 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
                         // todo: will remove to make will strong filtering (search with trash decreased result).
                         trim(*itt, trim_separator);
 
-                        if (is_digit(*itt) || itt->empty())
+                        if (itt->empty())
                         {
                            return -1;
                         }
-                        else if (filterMap.find(*itt) != filterMap.end())
+
+                        if ((filterMap.find(*itt) != filterMap.end()) || is_digit(*itt))
                         {
                            itt = tmpList.erase(itt);
                         }
                         else
                         {
-                           break;
+                           itt++;
                         }
                      }
                      return (int)tmpList.empty();
@@ -1120,7 +1121,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 11 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 12 (c) Diixo]\n");
       if (argc == 3)
       {
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
