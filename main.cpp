@@ -565,7 +565,7 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
                   {
                      std::list<std::wstring> tmpList;
                      wcstok(tstr, Delim, tmpList);
-                     const std::wstring trim_separator(L"$~@_.()*?~%");
+                     const std::wstring trim_separator(L".@_");
 
                      for (auto itt = tmpList.begin(); itt != tmpList.end(); )
                      {
