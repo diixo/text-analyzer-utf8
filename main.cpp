@@ -396,178 +396,183 @@ bool is_anydigit(const wstring_t& inStr, size_t start_id = 0)
    return result;
 }
 
-void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_t>& outList)
+const wstring_t key(L"rvx_)(+-!?0123456789@;,.:#&%$*^'~/\\");
+
+bool trim(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
 {
-   wstring_t key(L"rvx_)(+-!?0123456789@;,.:#&%$*^'~/\\");
-
-   for (std::list <wstring_t>::iterator it = outList.begin(); it != outList.end(); )
+   if ((wstr.size() == 1) && wcschr(ALLOWABLE, wstr.back()))
    {
-      wstring_t& wstr = *it;
+      //it = outList.erase(it);
+      return false;
+   }
+   else
+   {
+      rtrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x003f\x002e\x002f");
+      ltrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x002b");
 
-      if ((wstr.size() == 1) && wcschr(ALLOWABLE, wstr.back()))
+      //rtrim(wstr, L"\x0023\x0026\x0027\x0028\x0029\x002a\x002d\x002e\x002f\x003a\x003b\x003c\x003d\x003e\x003f\x005c\x007e\x00a9\x00ae\x005f");
+      //ltrim(wstr, L"\x0023\x0026\x0027\x0028\x0029\x002a\x002d\x002f\x005c\x007e\x00a9\x00ae\x005f");
+
+
+      bool skip = true;
+
+      wstring_t tstr = wstr;
+      for (int i = 0; i < tstr.length(); i++)
       {
-         it = outList.erase(it);
-         //++it;
+         if ((tstr[i] >= 0x0041) && (tstr[i] <= 0x005a))
+         {
+            tstr[i] = towlower(tstr[i]);
+         }
+
+         skip = skip && (wcschr(key.c_str(), tstr[i]) != NULL);
+      }
+
+
+      if (skip || (tstr.length() <= 2))
+      {
+         //it = outList.erase(it);
+         return false;
       }
       else
       {
-         rtrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x003f\x002e\x002f");
-         ltrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x002b");
-
-         //rtrim(wstr, L"\x0023\x0026\x0027\x0028\x0029\x002a\x002d\x002e\x002f\x003a\x003b\x003c\x003d\x003e\x003f\x005c\x007e\x00a9\x00ae\x005f");
-         //ltrim(wstr, L"\x0023\x0026\x0027\x0028\x0029\x002a\x002d\x002f\x005c\x007e\x00a9\x00ae\x005f");
-
-
-         bool skip = true;
-
-         wstring_t tstr = wstr;
-         for (int i = 0; i < tstr.length(); i++)
+         if (wstr[0] == L'#')
          {
-            if ((tstr[i] >= 0x0041) && (tstr[i] <= 0x005a))
-            {
-               tstr[i] = towlower(tstr[i]);
-            }
-
-            skip = skip && (wcschr(key.c_str(), tstr[i]) != NULL);
-         }
-
-
-         if (skip || (tstr.length() <= 2))
-         {
-            it = outList.erase(it);
+            ltrim(wstr, L"#");
+            ltrim(tstr, L"#");
+            //it = outList.erase(it);
+            return false;
          }
          else
          {
-            if (wstr[0] == L'#')
+            //todo: isdigit, www, https
+            auto fit = filterMap.find(tstr);
+            if (fit != filterMap.end() ||
+               tstr == L"&#124" ||
+               tstr == L"&quot" ||
+               tstr == L"&amp" ||
+               tstr == L"nbsp" ||
+               tstr == L"&lt" ||
+               tstr == L"&gt" ||
+               tstr.length() == 1 ||
+               tstr.find(L"http") != std::string::npos ||
+               tstr.find(L"java.") != std::string::npos ||
+               tstr.find(L"com.") != std::string::npos ||
+               tstr.find(L"org.") != std::string::npos ||
+               tstr.find(L".org") != std::string::npos ||
+               tstr.find(L".com") != std::string::npos ||
+               tstr.find(L".txt") != std::string::npos ||
+               tstr.find(L".log") != std::string::npos ||
+               tstr.find(L".exe") != std::string::npos ||
+               tstr.find(L".sh") != std::string::npos ||
+               tstr.find(L".py") != std::string::npos ||
+               tstr.find(L".js") != std::string::npos ||
+               tstr.find(L".php") != std::string::npos ||
+               tstr.find(L".htm") != std::string::npos ||
+               tstr.find(L".png") != std::string::npos ||
+               tstr.find(L".jpg") != std::string::npos ||
+               tstr.find(L"?php") != std::string::npos ||
+               tstr.find(L".jar") != std::string::npos ||
+               tstr.find(L".obj") != std::string::npos ||
+               tstr.find(L".dll") != std::string::npos ||
+               tstr.find(L".tar") != std::string::npos ||
+
+               tstr.find(L"tfp.") != std::string::npos ||
+               tstr.find(L"tf.") != std::string::npos ||
+               tstr.find(L"tfm.") != std::string::npos ||
+               tstr.find(L"tflite_") != std::string::npos ||
+               tstr.find(L"tfc.") != std::string::npos ||
+               tstr.find(L"tfa.") != std::string::npos ||
+               tstr.find(L"tff.") != std::string::npos ||
+               tstr.find(L"tfds.") != std::string::npos ||
+               tstr.find(L"tft.") != std::string::npos ||
+               tstr.find(L"tfma.") != std::string::npos ||
+               tstr.find(L"tfx.") != std::string::npos ||
+               tstr.find(L"tfdv.") != std::string::npos ||
+               tstr.find(L"tfmd.") != std::string::npos ||
+               tstr.find(L"tfrs.") != std::string::npos ||
+               tstr.find(L"tfdf.") != std::string::npos ||
+               tstr.find(L"tfl.") != std::string::npos ||
+               tstr.find(L"tfr.") != std::string::npos ||
+               tstr.find(L"tfg.") != std::string::npos ||
+               tstr.find(L"tf_agents.") != std::string::npos ||
+               tstr.find(L"tfmot.") != std::string::npos ||
+               tstr.find(L"tfq.") != std::string::npos ||
+               tstr.find(L"tfm.") != std::string::npos ||
+               tstr.find(L"tfio.") != std::string::npos ||
+               tstr.find(L"oryx.") != std::string::npos ||
+
+               tstr.find(L"::") != std::string::npos ||
+               tstr.find(L"$$") != std::string::npos ||
+               tstr.find(L"~/") != std::string::npos ||
+               tstr.find(L"//") != std::string::npos ||
+               tstr.find(L"0x") != std::string::npos ||
+               tstr.find(L"$\\") != std::string::npos ||
+               tstr.find(L"/.") != std::string::npos ||
+               tstr.find(L"/&") != std::string::npos ||
+               tstr.find(L"/%") != std::string::npos ||
+               tstr.find(L"./") != std::string::npos ||
+               tstr.find(L"'/") != std::string::npos ||
+               tstr.find(L"('") != std::string::npos ||
+               tstr.find(L"$(") != std::string::npos ||
+               tstr.find(L").") != std::string::npos ||
+               tstr.find(L"(&") != std::string::npos ||
+               tstr.find(L"-&") != std::string::npos ||
+               tstr.find(L"%&") != std::string::npos ||
+               tstr.find(L"__") != std::string::npos ||
+               tstr.find(L"--") != std::string::npos ||
+               tstr.find(L"\\\\") != std::string::npos ||
+               tstr.find(L".*") != std::string::npos ||
+               tstr.find(L".$") != std::string::npos ||
+               tstr.find(L"($") != std::string::npos ||
+               tstr.find(L"$-") != std::string::npos ||
+               tstr.find(L"\\?") != std::string::npos ||
+               tstr.find(L"/*") != std::string::npos ||
+               tstr.find(L"*/") != std::string::npos ||
+               (wcspbrk(tstr.c_str(), L":][=^{}") != 0)
+               )
             {
-               ltrim(wstr, L"#");
-               ltrim(tstr, L"#");
-               it = outList.erase(it);
+               //it = outList.erase(it);
+               return false;
             }
             else
             {
-               //todo: isdigit, www, https
-               auto fit = filterMap.find(tstr);
-               if (fit != filterMap.end() ||
-                  tstr == L"&#124" ||
-                  tstr == L"&quot" ||
-                  tstr == L"&amp" ||
-                  tstr == L"nbsp" ||
-                  tstr == L"&lt" ||
-                  tstr == L"&gt" ||
-                  tstr.length() == 1 ||
-                  tstr.find(L"http") != std::string::npos ||
-                  tstr.find(L"java.") != std::string::npos ||
-                  tstr.find(L"com.") != std::string::npos ||
-                  tstr.find(L"org.") != std::string::npos ||
-                  tstr.find(L".org") != std::string::npos ||
-                  tstr.find(L".com") != std::string::npos ||
-                  tstr.find(L".txt") != std::string::npos ||
-                  tstr.find(L".log") != std::string::npos ||
-                  tstr.find(L".exe") != std::string::npos ||
-                  tstr.find(L".sh") != std::string::npos ||
-                  tstr.find(L".py") != std::string::npos ||
-                  tstr.find(L".js") != std::string::npos ||
-                  tstr.find(L".php") != std::string::npos ||
-                  tstr.find(L".htm") != std::string::npos ||
-                  tstr.find(L".png") != std::string::npos ||
-                  tstr.find(L".jpg") != std::string::npos ||
-                  tstr.find(L"?php") != std::string::npos ||
-                  tstr.find(L".jar") != std::string::npos ||
-                  tstr.find(L".obj") != std::string::npos ||
-                  tstr.find(L".dll") != std::string::npos ||
-                  tstr.find(L".tar") != std::string::npos ||
-
-                  tstr.find(L"tfp.") != std::string::npos ||
-                  tstr.find(L"tf.") != std::string::npos ||
-                  tstr.find(L"tfm.") != std::string::npos ||
-                  tstr.find(L"tflite_") != std::string::npos ||
-                  tstr.find(L"tfc.") != std::string::npos ||
-                  tstr.find(L"tfa.") != std::string::npos ||
-                  tstr.find(L"tff.") != std::string::npos ||
-                  tstr.find(L"tfds.") != std::string::npos ||
-                  tstr.find(L"tft.") != std::string::npos ||
-                  tstr.find(L"tfma.") != std::string::npos ||
-                  tstr.find(L"tfx.") != std::string::npos ||
-                  tstr.find(L"tfdv.") != std::string::npos ||
-                  tstr.find(L"tfmd.") != std::string::npos ||
-                  tstr.find(L"tfrs.") != std::string::npos ||
-                  tstr.find(L"tfdf.") != std::string::npos ||
-                  tstr.find(L"tfl.") != std::string::npos ||
-                  tstr.find(L"tfr.") != std::string::npos ||
-                  tstr.find(L"tfg.") != std::string::npos ||
-                  tstr.find(L"tf_agents.") != std::string::npos ||
-                  tstr.find(L"tfmot.") != std::string::npos ||
-                  tstr.find(L"tfq.") != std::string::npos ||
-                  tstr.find(L"tfm.") != std::string::npos ||
-                  tstr.find(L"tfio.") != std::string::npos ||
-                  tstr.find(L"oryx.") != std::string::npos ||
-
-                  tstr.find(L"::") != std::string::npos ||
-                  tstr.find(L"$$") != std::string::npos ||
-                  tstr.find(L"~/") != std::string::npos ||
-                  tstr.find(L"//") != std::string::npos ||
-                  tstr.find(L"0x") != std::string::npos ||
-                  tstr.find(L"$\\") != std::string::npos ||
-                  tstr.find(L"/.") != std::string::npos ||
-                  tstr.find(L"/&") != std::string::npos ||
-                  tstr.find(L"/%") != std::string::npos ||
-                  tstr.find(L"./") != std::string::npos ||
-                  tstr.find(L"'/") != std::string::npos ||
-                  tstr.find(L"('") != std::string::npos ||
-                  tstr.find(L"$(") != std::string::npos ||
-                  tstr.find(L").") != std::string::npos ||
-                  tstr.find(L"(&") != std::string::npos ||
-                  tstr.find(L"-&") != std::string::npos ||
-                  tstr.find(L"%&") != std::string::npos ||
-                  tstr.find(L"__") != std::string::npos ||
-                  tstr.find(L"--") != std::string::npos ||
-                  tstr.find(L"\\\\") != std::string::npos ||
-                  tstr.find(L".*") != std::string::npos ||
-                  tstr.find(L".$") != std::string::npos ||
-                  tstr.find(L"($") != std::string::npos ||
-                  tstr.find(L"$-") != std::string::npos ||
-                  tstr.find(L"\\?") != std::string::npos ||
-                  tstr.find(L"/*") != std::string::npos ||
-                  tstr.find(L"*/") != std::string::npos ||
-                  (wcspbrk(tstr.c_str(), L":][=^{}") != 0)
-                  )
+               //////////////////////////////////////////////////////////////////////////
+               auto check = [&filterMap, &tstr](const wchar_t* Delim)->int
                {
-                  it = outList.erase(it);
-               }
-               else
-               {
-                  //////////////////////////////////////////////////////////////////////////
-                  auto check = [&filterMap, &tstr](const wchar_t* Delim)->int
+                  std::list<std::wstring> tmpList;
+                  wcstok(tstr, Delim, tmpList);
+
+                  for (auto itt = tmpList.begin(); itt != tmpList.end(); )
                   {
-                     std::list<std::wstring> tmpList;
-                     wcstok(tstr, Delim, tmpList);
-
-                     for (auto itt = tmpList.begin(); itt != tmpList.end(); )
+                     if (is_digit(*itt))
                      {
-                        if (is_digit(*itt))
-                        {
-                           return -1;
-                        }
-                        else if (filterMap.find(*itt) != filterMap.end() || (itt->length() == 1))
-                        {
-                           itt = tmpList.erase(itt);
-                        }
-                        else
-                        {
-                           break;
-                        }
+                        return -1;
                      }
-                     return (int)tmpList.empty();
-                  };
-                  //////////////////////////////////////////////////////////////////////////
-                  auto checkStrong = [&filterMap, &tstr](const wchar_t* Delim)->int
-                  {
-                     std::list<std::wstring> tmpList;
-                     wcstok(tstr, Delim, tmpList);
-                     const std::wstring trim_separator(L".@_");
+                     else if (filterMap.find(*itt) != filterMap.end() || (itt->length() == 1))
+                     {
+                        itt = tmpList.erase(itt);
+                     }
+                     else
+                     {
+                        break;
+                     }
+                  }
+                  return (int)tmpList.empty();
+               };
+               //////////////////////////////////////////////////////////////////////////
+               auto checkStrong = [&filterMap, &tstr](const wchar_t* Delim)->int
+               {
+                  std::list<std::wstring> tmpList;
+                  wcstok(tstr, Delim, tmpList);
+                  const std::wstring trim_separator(L".@_");
 
-                     for (auto itt = tmpList.begin(); itt != tmpList.end(); )
+                  for (auto itt = tmpList.begin(); itt != tmpList.end(); )
+                  {
+                     if (is_digit(*itt))
+                     {
+                        itt = tmpList.erase(itt);
+                     }
+                     else
                      {
                         // todo: will remove to make will strong filtering (search with trash decreased result).
                         trim(*itt, trim_separator);
@@ -577,7 +582,11 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
                            return -1;
                         }
 
-                        if ((filterMap.find(*itt) != filterMap.end()) || is_digit(*itt))
+                        if (is_digit(*itt))
+                        {
+                           return -1;
+                        }
+                        if (filterMap.find(*itt) != filterMap.end())
                         {
                            itt = tmpList.erase(itt);
                         }
@@ -586,45 +595,62 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
                            itt++;
                         }
                      }
-                     return (int)tmpList.empty();
-                  };
-                  //////////////////////////////////////////////////////////////////////////
+                  }
+                  return (int)tmpList.empty();
+               };
+               //////////////////////////////////////////////////////////////////////////
 
-                  int checkR = check(L"$~@_.()*?~%/\\");
+               int checkR = check(L"$~@_.()*?~%/\\");
 
-                  // check with splitting by mask: xx/xx/xx
-                  if (checkR > 0 || checkR < 0)
+               // check with splitting by mask: xx/xx/xx
+               if (checkR > 0 || checkR < 0)
+               {
+                  //it = outList.erase(it);
+                  return false;
+               }
+               else
+               {
+                  checkR = checkStrong(L"-");
+
+                  // check with splitting by mask: xx-xx-xx
+                  if (checkR > 0)
                   {
-                     it = outList.erase(it);
+                     auto itf = maskedMap.find(tstr);
+                     if (itf != maskedMap.end()) { itf->second++; }
+                     else { maskedMap[tstr] = 1; }
+                     //////////////////////////////////////////////
+                     //it = outList.erase(it);
+                     return false;
+                  }
+                  else if (checkR < 0)
+                  {
+                     // skip without adding to dictionary
+                     //it = outList.erase(it);
+                     return false;
                   }
                   else
                   {
-                     checkR = checkStrong(L"-");
-
-                     // check with splitting by mask: xx-xx-xx
-                     if (checkR > 0)
-                     {
-                        auto itf = maskedMap.find(tstr);
-                        if (itf != maskedMap.end()) { itf->second++; }
-                        else { maskedMap[tstr] = 1; }
-                        //////////////////////////////////////////////
-                        // tstr = *it
-                        it = outList.erase(it);
-                     }
-                     else if (checkR < 0)
-                     {
-                        // skip without adding to dictionary
-                        // tstr = *it
-                        it = outList.erase(it);
-                     }
-                     else
-                     {
-                        ++it;
-                     }
+                     //++it;
+                     return true;
                   }
                }
             }
          }
+      }
+   }
+}
+
+void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_t>& outList)
+{
+   for (std::list <wstring_t>::iterator it = outList.begin(); it != outList.end(); )
+   {
+      if (trim(*it, filterMap))
+      {
+         ++it;
+      }
+      else
+      {
+         it = outList.erase(it);
       }
    }
 }
@@ -1112,7 +1138,7 @@ int main(int argc, char* argv[])
    std::map <wstring_t, size_t> mainMap;
    std::map <wstring_t, size_t> filterMap;
 
-   if (argc < 2)
+   if (argc > 3)
    {
       report(mainMap, filterMap, filterMap, filterMap);
       wprintf(L"No extra command-line arguments passed:\n");
@@ -1121,7 +1147,10 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 12 (c) Diixo]\n");
+      std::map <wstring_t, size_t> dictMap;
+      std::map <wstring_t, size_t> diixMap;
+
+      wprintf(L"Text-analyzer [Version 14 (c) Diixo]\n");
       if (argc == 3)
       {
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
