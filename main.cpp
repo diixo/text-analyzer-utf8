@@ -1147,10 +1147,16 @@ int main(int argc, char* argv[])
    }
    else
    {
-      std::map <wstring_t, size_t> dictMap;
-      std::map <wstring_t, size_t> diixMap;
-
       wprintf(L"Text-analyzer [Version 14 (c) Diixo]\n");
+      if (argc == 1)
+      {
+         std::map <wstring_t, size_t> dictMap;
+         std::map <wstring_t, size_t> diixMap;
+
+         loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
+         loadFile(wstring_t(L"diixonary.txt"), wstring_t(), diixMap);
+         //loadFile_utf8("diixonary.txt", wstring_t(), filterMap, diixMap, wstring_t());
+      }
       if (argc == 3)
       {
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
@@ -1162,9 +1168,11 @@ int main(int argc, char* argv[])
       }
       if (argc == 2)
       {
+         loadFile(wstring_t(L"db-full.txt"), wstring_t(), filterMap);
+
          const wstring_t mainFile = cstring_to_wstring(argv[1]);
 
-         loadFile_utf8(argv[1], mainFile + L".u16", filterMap, mainMap, wstring_t());
+         loadFile_utf8(argv[1], mainFile + L".u16", filterMap, mainMap, mainFile + L"--filtered.u16");
          mapToFile(mainFile, mainMap, wstring_t());
 
          //report(mainMap, cmpMap, diffMap, resultMap);
