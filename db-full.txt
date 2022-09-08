@@ -12,6 +12,7 @@ abided
 abides
 ablating
 able
+ably
 abnormally
 abode
 abort
@@ -511,6 +512,7 @@ beat
 beaten
 beats
 beautifully
+beautify
 became
 becaming
 because
@@ -1278,6 +1280,7 @@ damaging
 damped
 dare
 dared
+dares
 daring
 dated
 dating
@@ -2237,6 +2240,8 @@ faraway
 farther
 farthest
 faster
+fastified
+fastify
 fastly
 favorably
 fear
@@ -2305,6 +2310,7 @@ fixes
 fixing
 flagged
 flashes
+flashing
 flatten
 flattened
 flattening
@@ -2781,6 +2787,7 @@ in
 in-lining
 inadvertently
 inappropriately
+inarguably
 inasmuch
 inc
 incidentally
@@ -2993,6 +3000,7 @@ interview
 into
 intract
 intracted
+intrigued
 intriguing
 intrinsically
 introduce
@@ -5372,6 +5380,7 @@ studied
 studies
 study
 studying
+stumble
 stumbled
 styled
 sub
@@ -5988,6 +5997,8 @@ update
 updated
 updates
 updating
+upend
+upended
 upgrade
 upgraded
 upgrades
@@ -6311,8 +6322,10 @@ zooms
 16-bit
 16bit
 1d
+2-d
 256-bit
 2d
+3-d
 3-rd
 32-bit
 32bit
@@ -6995,6 +7008,7 @@ backslash
 backslashed
 backslashes
 backspace
+backstory
 backtrace
 backtrack
 backtracking
@@ -7151,6 +7165,8 @@ block-scoped
 blockchain
 blockchain-based
 blockers
+blockquote
+blockquotes
 blocks
 blog
 blogger
@@ -9604,6 +9620,7 @@ formalization
 formalizing
 format
 formation
+formative
 formatter
 formcontrol
 former
@@ -10292,6 +10309,7 @@ imminently
 immutability
 immutable
 immutably
+immuted
 impactful
 impairment
 impairments
@@ -11667,6 +11685,7 @@ minibatching
 minification
 minimal
 minimalistic
+minimally
 minimization
 minimizer
 minimum
@@ -12066,6 +12085,7 @@ next-gen
 next-generation
 next.js
 nextdoor
+nextjs
 nginx
 nhibernate
 nice
@@ -12333,6 +12353,7 @@ occurrences
 octal
 odbc
 odd
+oddity
 oddly
 oddness
 odds
@@ -13228,6 +13249,7 @@ property
 proportion
 proportional
 proportionally
+proportions
 proposal
 proposals
 proposition
@@ -14729,6 +14751,7 @@ streamer
 streaming
 streamline
 streamlined
+streamlining
 streams
 street
 strength
@@ -15066,6 +15089,7 @@ tasks
 taskset
 tcp
 tdd
+teachable
 teacher
 teachers
 team
@@ -15228,6 +15252,8 @@ thoughtful
 thoughtfully
 thoughtless
 thoughts
+thoughtwork
+thoughtworks
 thousand
 thousands
 thread
@@ -15596,6 +15622,7 @@ uncommitted
 uncommon
 uncommonly
 uncompetitive
+uncompleted
 uncomplicated
 uncompressed
 uncompressing
@@ -15858,7 +15885,6 @@ up-sampled
 up-sampling
 upbeat
 updater
-upend
 upfront
 upheaval
 upheld
@@ -16197,6 +16223,7 @@ web-services
 web-site
 web-sites
 web-technology
+web3
 webapi
 webapp
 webapps

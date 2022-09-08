@@ -806,13 +806,15 @@ void report(
 //////////////////////////////////////////////////////////////////////////
 
 
-void splitString(const wchar_t* buff, std::list<wstring_t>& words)
+void splitString(const wchar_t* buff, std::list<std::list <wstring_t>*>& table)
 {
    const wchar_t* p0 = buff;
    const wchar_t* p_new = buff;
    size_t sz = 0;
    const wstring_t STR_SEPARATOR(1, L';');
    const wstring_t Delim(L".:?");
+
+   table.push_back(new std::list <wstring_t>());
 
 
    while (*p0)
@@ -825,20 +827,25 @@ void splitString(const wchar_t* buff, std::list<wstring_t>& words)
             rtrim(s_new, Delim);
             if (!s_new.empty())
             {
-               words.push_back(s_new);
+               //words.push_back(s_new);
+               table.back()->push_back(s_new);
+
                if (s_new.size() != sz)
                {
-                  words.push_back(STR_SEPARATOR);
+                  //words.push_back(STR_SEPARATOR);
+                  table.push_back(new std::list <wstring_t>());
                }
             }
             else
             {
-               words.push_back(STR_SEPARATOR);
+               //words.push_back(STR_SEPARATOR);
+               table.push_back(new std::list <wstring_t>());
             }
          }
          if (wcschr(PUNCT, *p0))
          {
-            words.push_back(wstring_t(1, *p0));
+            //words.push_back(wstring_t(1, *p0));
+            table.push_back(new std::list <wstring_t>());
          }
          p_new = ++p0;
          sz = 0;
@@ -857,47 +864,65 @@ void splitString(const wchar_t* buff, std::list<wstring_t>& words)
       rtrim(s_new, Delim);
       if (!s_new.empty())
       {
-         words.push_back(s_new);
+         //words.push_back(s_new);
+         table.back()->push_back(s_new);
       }
-   }
-   if (!words.empty())
-   {
-      words.push_back(STR_SEPARATOR);
    }
 }
 
 void processString(const wchar_t* buff, size_t buff_sz, const std::map <wstring_t, size_t>& filterMap, std::map <wstring_t, size_t>& ioMap, FILE* filteredOut)
 {
-   std::list <wstring_t> tokenList;
+   std::list<std::list <wstring_t>*> table;
 
    //wcstok(wstr, L"\x0020\x0021\x002c\x003b\x007c", tokenList);   // " !,;|"
-   splitString(buff, tokenList);
+   splitString(buff, table);
 
    //const wstring_t wstr(buff);
    //assert(buff_sz == wstr.size());
 
-
-   trimming(filterMap, tokenList);
-
-   if (filteredOut)
+   for (auto it = table.begin(); it != table.end();)
    {
-      auto i = tokenList.begin();
-      while (i != tokenList.end())
+      std::list <wstring_t>& tokenList = *(*it);
+      trimming(filterMap, tokenList);
+
+      appendToMap(tokenList, ioMap);
+
+      if (tokenList.empty())
       {
-         fputws(i->c_str(), filteredOut);
-         i++;
-         if (i != tokenList.end())
-         {
-            fputwc(L' ', filteredOut);
-         }
-         else
-         {
-            fputwc(L'\n', filteredOut);
-         }
+         delete *it;
+         it = table.erase(it);
       }
+      else it++;
    }
 
-   appendToMap(tokenList, ioMap);
+   for (auto it = table.begin(); it != table.end(); it++)
+   {
+      std::list <wstring_t>& tokenList = *(*it);
+      if (filteredOut)
+      {
+         auto i = tokenList.begin();
+         while (i != tokenList.end())
+         {
+            fputws(i->c_str(), filteredOut);
+
+            if (i != --tokenList.end())
+            {
+               fputwc(L' ', filteredOut);
+            }
+            i++;
+         }
+      }
+      if (it != --table.end())
+      {
+         fputwc(L' ', filteredOut);
+      }
+      delete *it;
+   }
+
+   if (filteredOut && !table.empty())
+   {
+      fputwc(L'\n', filteredOut);
+   }
 }
 
 
@@ -1013,6 +1038,10 @@ void loadFile(const std::wstring& filename_in, const std::wstring& filename_out,
    {
       wprintf(L"can't load file: %s\n", filename_in.c_str());
       return;
+   }
+   else
+   {
+      wprintf(L"File: %s loaded\n", filename_in.c_str());
    }
 
    FILE *pOutput = (filename_out.length() > 0) ? _wfopen(filename_out.c_str(), L"w, ccs=UTF-16LE") : 0;
@@ -1147,7 +1176,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 14 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 16 (c) Diixo]\n");
       if (argc == 1)
       {
          std::map <wstring_t, size_t> dictMap;
