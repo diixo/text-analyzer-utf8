@@ -825,8 +825,23 @@ void splitString(const wchar_t* buff, std::list<std::list <wstring_t>*>& table)
          if (sz > 0)
          {
             wstring_t s_new(p_new, sz);
-            rtrim(s_new, RDelim);
             ltrim(s_new, LDelim);
+            if (!s_new.empty())
+            {
+               if (s_new.size() != sz)
+               {
+                  //words.push_back(STR_SEPARATOR);
+                  table.push_back(new std::list <wstring_t>());
+               }
+            }
+            else
+            {
+               //words.push_back(STR_SEPARATOR);
+               table.push_back(new std::list <wstring_t>());
+            }
+            sz = s_new.size();   // keep size before next trimming.
+            
+            rtrim(s_new, RDelim);
             if (!s_new.empty())
             {
                //words.push_back(s_new);
@@ -846,7 +861,6 @@ void splitString(const wchar_t* buff, std::list<std::list <wstring_t>*>& table)
          }
          if (wcschr(PUNCT, *p0))
          {
-            //words.push_back(wstring_t(1, *p0));
             table.push_back(new std::list <wstring_t>());
          }
          p_new = ++p0;
@@ -867,7 +881,6 @@ void splitString(const wchar_t* buff, std::list<std::list <wstring_t>*>& table)
       ltrim(s_new, LDelim);
       if (!s_new.empty())
       {
-         //words.push_back(s_new);
          table.back()->push_back(s_new);
       }
    }
@@ -1179,7 +1192,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 17 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 18 (c) Diixo]\n");
       if (argc == 1)
       {
          std::map <wstring_t, size_t> dictMap;

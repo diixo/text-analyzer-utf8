@@ -390,6 +390,7 @@ aspired
 aspiring
 assemble
 assembled
+asserts
 assess
 assessed
 assesses
@@ -537,6 +538,7 @@ beheld
 behind
 behold
 being
+belatedly
 believe
 believed
 believes
@@ -972,6 +974,8 @@ computing
 concatenate
 concatenated
 concatenates
+conceal
+concealed
 concede
 conceded
 concedes
@@ -1308,6 +1312,7 @@ decayed
 decaying
 decays
 deceive
+decently
 decentralize
 deceptively
 decide
@@ -1878,6 +1883,7 @@ eludes
 emailed
 emailing
 embark
+embarked
 embarking
 embed
 embedded
@@ -1989,6 +1995,7 @@ enough
 enqueue
 enqueued
 enrich
+enriched
 enriches
 enriching
 enrolling
@@ -2210,6 +2217,8 @@ facilitated
 facilitating
 factored
 factorialize
+factorize
+factorized
 factually
 fade
 fade-in
@@ -2293,6 +2302,7 @@ finish
 finished
 finishes
 finishing
+finitely
 fire
 fired
 fires
@@ -2318,6 +2328,8 @@ flattens
 flawed
 fled
 flee
+fleeting
+fleetly
 flew
 flex
 flexed
@@ -2463,6 +2475,8 @@ furthermore
 gain
 gained
 gains
+gamified
+gamify
 gather
 gathered
 gathers
@@ -2590,6 +2604,7 @@ harmonize
 harmonized
 harms
 harness
+harnessing
 has
 hashed
 hasn't
@@ -2853,6 +2868,9 @@ inflate
 inflated
 inflates
 inflating
+inflect
+inflected
+inflecting
 inflicted
 influence
 influenced
@@ -2970,6 +2988,7 @@ interesting
 interestingly
 interfere
 interfered
+interferes
 interfering
 interjudge
 interleave
@@ -4435,6 +4454,7 @@ reentered
 reentry
 reexamine
 reexamined
+refactored
 refer
 referenced
 referencing
@@ -5056,6 +5076,7 @@ several
 severed
 severely
 shaded
+shadowed
 shake
 shaked
 shaken
@@ -5704,6 +5725,7 @@ transformation
 transformed
 transforming
 transforms
+transiently
 transit
 transitioned
 transitively
@@ -6299,6 +6321,7 @@ you`ll
 you`re
 you`ve
 your
+your's
 yours
 yourself
 yourselves
@@ -6689,6 +6712,8 @@ anti-aliasing
 anti-piracy
 anti-spyware
 anti-virus
+antialiasing
+anticipation
 antivirus
 antonyms
 anxiety
@@ -6961,6 +6986,7 @@ autoreply
 autosave
 autoscroll
 autoselect
+autotest
 auxiliary
 availability
 average
@@ -7873,6 +7899,7 @@ concatenating
 concatenation
 concatenations
 concave
+concealing
 conceivably
 concentrating
 concept
@@ -8443,6 +8470,7 @@ defects
 defended
 defender
 defense
+defenses
 deferrable
 deferring
 deficiencies
@@ -8485,6 +8513,7 @@ demoed
 demographics
 demonstrably
 demonstration
+demonstrational
 demos
 denies
 denoising
@@ -9765,6 +9794,7 @@ gameplay
 gamer
 gamers
 games
+gamification
 gaming
 gamma
 gan
@@ -10709,6 +10739,7 @@ interoperates
 interpolating
 interpolation
 interpolations
+interpolator
 interpretability
 interpretable
 interpretation
@@ -11710,6 +11741,7 @@ misc
 miscellaneous
 misclassification
 misclassifications
+miscommunication
 misconception
 misconceptions
 misconfiguration
@@ -11737,6 +11769,7 @@ mixture
 mixup
 ml
 mnemonic
+mnist
 mobile
 mobile-development
 mobile-first
@@ -11954,6 +11987,7 @@ multithread
 multithreaded
 multithreading
 multitouch
+multitude
 multivariate
 multiversion
 music
@@ -13516,6 +13550,7 @@ rebuildable
 rebuilding
 rebuttal
 recalculating
+recalculation
 receipt
 receipts
 receivable
@@ -13678,6 +13713,7 @@ reintroducing
 reiterating
 rejection
 rejections
+relatable
 relatedness
 relation
 relational
@@ -14085,6 +14121,7 @@ scrums
 scsi
 sd
 sdk
+sdk's
 sdks
 sdl
 sdram
@@ -14123,6 +14160,7 @@ seeds
 seeker
 segfault
 segment
+segmental
 segmentation
 segmentation-fault
 segmentations
@@ -14266,6 +14304,7 @@ shaders
 shades
 shading
 shadow
+shadowing
 shadows
 shallow
 shapeless
@@ -14315,6 +14354,7 @@ showdown
 shrinkage
 shut-down
 shutdown
+shutdowns
 side
 side-by-side
 side-effect
@@ -14512,6 +14552,7 @@ solidity
 solr
 solution
 solutions
+solvable
 solver
 solvers
 somefunction
@@ -14860,6 +14901,7 @@ suboptimal
 subpage
 subpart
 subparts
+subpixel
 subproblem
 subproblems
 subprocess
@@ -14886,6 +14928,7 @@ subsets
 subsides
 subsidiary
 subspace
+subspaces
 substantial
 substantive
 substitutes
@@ -15144,6 +15187,7 @@ technology-oriented
 technology-related
 technovation
 techpoint
+techs
 tedious
 telecom
 telecommunication
@@ -15662,6 +15706,7 @@ undesire
 undesired
 undirected
 undisclosed
+undivided
 undividing
 undo-redo
 undocked
@@ -15740,6 +15785,7 @@ united
 units
 unittest
 unittesting
+unittests
 unity
 unity2d
 unity3d
@@ -15772,6 +15818,7 @@ unmistakable
 unmodifiable
 unmodified
 unmountable
+unmounting
 unmultipliable
 unmute
 unnamed
@@ -15886,6 +15933,7 @@ up-sampling
 upbeat
 updater
 upfront
+upgradable
 upheaval
 upheld
 uplink
@@ -16261,6 +16309,7 @@ webpage
 webpages
 webproduction
 webrequest
+webs
 webscale
 webserver
 webservice
@@ -16515,6 +16564,7 @@ zeroes
 zeros
 zlib
 zone
+zoned
 zones
 zoomable
 zooming
