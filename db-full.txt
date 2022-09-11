@@ -28,6 +28,8 @@ abscond
 absconding
 absent
 absolutely
+absorb
+absorbed
 abstracting
 abstractly
 abstracts
@@ -628,6 +630,8 @@ braced
 brag
 bragged
 brags
+breached
+breaching
 break
 breaking
 breakup
@@ -1018,6 +1022,7 @@ confirmed
 confirms
 conflated
 conflates
+conflicted
 conform
 conformed
 conforming
@@ -1380,6 +1385,7 @@ default
 defaulted
 defeat
 defeating
+defected
 defend
 defending
 defends
@@ -1490,6 +1496,9 @@ describe
 described
 describes
 describing
+deselect
+deselected
+deselectes
 deserialize
 deserialized
 deserializes
@@ -1569,6 +1578,7 @@ differ
 differed
 differentiate
 differentiated
+differentiates
 differently
 differing
 differs
@@ -1667,6 +1677,7 @@ displaying
 displays
 dispose
 disposed
+disposes
 disposing
 disprove
 disproved
@@ -1875,6 +1886,7 @@ elongate
 elongated
 elongates
 else
+else's
 elsewhere
 else’s
 elude
@@ -2030,8 +2042,11 @@ enveloping
 envision
 envisioned
 envisioning
+envisions
 equal
 equaled
+equalize
+equalized
 equally
 equate
 equip
@@ -2363,6 +2378,7 @@ focus
 focused
 focuses
 focusing
+focusout
 fold
 folds
 follow
@@ -2472,6 +2488,8 @@ funded
 funds
 further
 furthermore
+fuse
+fused
 gain
 gained
 gains
@@ -2771,6 +2789,7 @@ imparted
 impelled
 impend
 impending
+impersonate
 implement
 implemented
 implementing
@@ -2915,6 +2934,8 @@ inputted
 inputting
 inquire
 inquired
+inscribe
+inscribed
 insert
 inserted
 inserters
@@ -3431,6 +3452,7 @@ mis
 misaligned
 misbehave
 misbehaved
+misbehaves
 misclassified
 misclassifies
 misclassify
@@ -3635,6 +3657,7 @@ observing
 obsolete
 obsoleted
 obsoletes
+obstruct
 obtain
 obtained
 obtaining
@@ -3761,6 +3784,7 @@ outshare
 outshared
 outsharing
 outward
+outwards
 outweigh
 over
 overall
@@ -4146,7 +4170,9 @@ prohibited
 project
 projected
 projecting
+prolong
 prolonged
+prolongs
 prominently
 promise
 promised
@@ -4201,6 +4227,7 @@ published
 publishes
 publishing
 pull
+pulldown
 pulled
 pulling
 pulls
@@ -4292,6 +4319,10 @@ reaching
 react
 reacted
 reacting
+reactivate
+reactivated
+reactivates
+reactivating
 read
 readapted
 readily
@@ -4428,7 +4459,10 @@ recycled
 red
 redact
 redacted
+redeclare
 redeclared
+redeclares
+redeclaring
 redefine
 redefined
 redefines
@@ -4445,6 +4479,7 @@ redo
 redone
 redownload
 redownloaded
+redrawn
 reduce
 reduced
 reduces
@@ -4517,6 +4552,10 @@ regularizing
 regularly
 regulate
 regulated
+rehash
+rehashed
+rehashes
+rehashing
 reified
 reify
 reimburse
@@ -4537,6 +4576,9 @@ reinstalled
 reinstalling
 reinstate
 reinstated
+reintegrate
+reintegrated
+reintegrating
 reinterpret_cast
 reinterprets
 reinvent
@@ -4646,7 +4688,9 @@ renews
 renormalize
 renormalized
 renormalizing
+renovate
 renovated
+renovates
 reopen
 reopened
 reopening
@@ -4658,6 +4702,8 @@ reorganized
 repackaging
 repaied
 repaint
+repainted
+repainting
 repaints
 repair
 repaired
@@ -4717,6 +4763,7 @@ reread
 reroute
 rerouting
 rerun
+resample
 resampled
 resampling
 rescale
@@ -4731,6 +4778,7 @@ researches
 researching
 reselect
 resemble
+resembled
 resembles
 resend
 resends
@@ -4993,6 +5041,7 @@ scrambling
 scrap
 scrape
 scraped
+scrapes
 scrapped
 screening
 screw
@@ -5294,6 +5343,7 @@ splitting
 spoke
 spoken
 sponsored
+spoofed
 spool
 spooled
 sprang
@@ -5458,6 +5508,7 @@ summing
 sunk
 supersede
 superseded
+supersedes
 supervise
 supervised
 supplement
@@ -5594,6 +5645,9 @@ terminate
 terminated
 terminates
 terminating
+tessellate
+tessellated
+tessellates
 test
 tested
 testing
@@ -5623,6 +5677,7 @@ themselves
 then
 theoretically
 there
+there're
 there's
 thereafter
 thereby
@@ -5672,6 +5727,7 @@ tied
 tightly
 tiled
 till
+tilted
 timely
 tired
 tmp
@@ -5693,6 +5749,7 @@ topping
 tore
 torn
 total
+totaled
 totally
 touch
 touched
@@ -5735,6 +5792,7 @@ translates
 translating
 translation
 transmit
+transmits
 transmitted
 transport
 transported
@@ -5742,6 +5800,7 @@ transports
 transpose
 transposed
 transposes
+transposing
 transverse
 transversed
 transverses
@@ -5851,6 +5910,7 @@ undecided
 undeclared
 undef
 undefined
+undeploy
 under
 underestimate
 underestimated
@@ -5876,6 +5936,7 @@ understands
 understood
 undertake
 undertaken
+undertook
 underused
 undervalued
 undesirably
@@ -6043,6 +6104,7 @@ upsets
 upsizing
 upskill
 upstart
+uptill
 upto
 upvote
 upvoted
@@ -6512,6 +6574,8 @@ advertising
 advice
 advices
 advisable
+adware
+adwares
 adwords
 affair
 affairs
@@ -6614,6 +6678,7 @@ ambiguate
 ambiguities
 ambiguity
 ambiguous
+ambiguously
 ambition
 ambitions
 ambitious
@@ -6738,6 +6803,7 @@ appcomponent
 appearance
 appearances
 append-only
+appender
 appendix
 appendonly
 appengine
@@ -6789,6 +6855,7 @@ archives
 archiving
 arduino
 arduinos
+arduous
 area
 areas
 argument
@@ -6819,11 +6886,13 @@ art-direction
 art-director
 art-hub
 art-master
+artefacts
 article
 articles
 artifact
 artifacts
 artificial
+artist
 arts
 artwork
 as-is
@@ -6899,6 +6968,7 @@ attenuation
 attitude
 attraction
 attractive
+attractively
 attribute
 attributed
 attributes
@@ -6950,6 +7020,7 @@ autocomplete
 autocompletion
 autoconf
 autocorrect
+autocorrection
 autocorrelation
 autocorrelations
 autodesk
@@ -6983,7 +7054,9 @@ autoplay
 autoregressive
 autorelease
 autoreply
+autorotation
 autosave
+autoscaling
 autoscroll
 autoselect
 autotest
@@ -7057,6 +7130,7 @@ bands
 bandwidth
 banner
 bar
+barycentric
 base-point
 baseline
 baselines
@@ -7085,6 +7159,7 @@ beautifulsoup
 beauty
 beforeupdate
 beginner
+beginner's
 beginners
 beginner’s
 behalf
@@ -7207,6 +7282,7 @@ bmp
 board
 boards
 body
+bold
 bonding
 bonus
 book
@@ -7265,7 +7341,9 @@ breach
 break-even
 breakage
 breakdown
+breakdowns
 breakout
+breakouts
 breakpoint
 breakpoints
 breaks
@@ -7283,6 +7361,7 @@ broad
 broadband
 broadcast
 broadcasting
+broadcasts
 broadened
 broadening
 broader
@@ -7302,6 +7381,7 @@ btree
 bucket
 budget
 buffer
+buffering
 buffers
 bug
 bug-monitoring
@@ -7520,6 +7600,7 @@ cheapest
 cheated
 check-in
 check-ins
+checkable
 checkbook
 checkbox
 checkboxes
@@ -7706,6 +7787,7 @@ codecs
 codedeploy
 codefest
 codeforces
+codename
 codenewbie
 codepage
 codepoint
@@ -7904,6 +7986,7 @@ conceivably
 concentrating
 concept
 conception
+conceptional
 concepts
 conceptual
 concern
@@ -7913,6 +7996,7 @@ concessions
 concise
 conclusion
 conclusions
+concordance
 concrete
 concurrency
 concurrent
@@ -7946,6 +8030,7 @@ conflations
 conflict
 conflicting
 conflicts
+confluent
 conformance
 confounding
 confusion
@@ -8046,6 +8131,8 @@ continuations
 continuity
 continuous
 continuous-integration
+contour
+contours
 contra-variance
 contract
 contract-oriented
@@ -8125,6 +8212,7 @@ corollary
 coroutine
 coroutines
 corporate
+corporates
 corporation
 corporation's
 corporations
@@ -8145,6 +8233,7 @@ costly
 countable
 countdown
 counter
+counter-clockwise
 counterclockwise
 counterpart
 counterparts
@@ -8471,6 +8560,7 @@ defended
 defender
 defense
 defenses
+defensive
 deferrable
 deferring
 deficiencies
@@ -8726,6 +8816,7 @@ disassembly
 disc
 discarding
 discards
+discernible
 discerning
 disciplines
 discloses
@@ -8766,6 +8857,7 @@ disparate
 dispatcher
 dispatchers
 displacement
+disposable
 disposal
 disproportionate
 disputing
@@ -8812,6 +8904,7 @@ divergent
 diverse
 diversity
 divider
+dividers
 divisible
 division
 divisions
@@ -9055,6 +9148,7 @@ eligible
 elimination
 eliminator
 elite
+ellipse
 ellipsis
 elusive
 emacs
@@ -9107,6 +9201,7 @@ encouragement
 encourages
 encouraging
 encryption
+encyclopedia
 end-time
 end-user
 end-users
@@ -9206,6 +9301,7 @@ equal-size
 equalities
 equality
 equals
+equatable
 equation
 equations
 equidistant
@@ -9291,6 +9387,7 @@ exchanges
 excitement
 exclamation
 exclusion
+exclusions
 exclusive
 exclusivity
 exec
@@ -9370,6 +9467,7 @@ expressions
 expressive
 expressiveness
 expressivity
+expressjs
 extendable
 extensibility
 extensible
@@ -9378,6 +9476,7 @@ extensions
 extensive
 external
 externals
+extjs
 extra-easy
 extraction
 extractions
@@ -9510,12 +9609,14 @@ file-io
 file-upload
 filed
 filename
+filenames
 filepath
 fileprovider
 files
 filesize
 filesystem
 filetree
+fillable
 filter
 filters
 filtration
@@ -9653,6 +9754,7 @@ formative
 formatter
 formcontrol
 former
+formless
 formula
 formulas
 formulation
@@ -9675,6 +9777,7 @@ four
 fourier
 fourth
 fpga
+fpu
 fractal
 fraction
 fractional
@@ -9707,6 +9810,7 @@ frequencies
 frequency
 frequent
 fresh
+freshly
 from-scratch
 front
 front-end
@@ -9893,6 +9997,7 @@ globbing
 globe
 glow
 glsl
+glut
 glyphs
 gmail
 gnome
@@ -10060,6 +10165,7 @@ hashing
 hashmap
 hashset
 hashtable
+hashtables
 hashtag
 hashtags
 haskell
@@ -10099,6 +10205,7 @@ heavyweight
 hefty
 height
 heightmap
+heights
 held-up
 helloworld
 helpdesk
@@ -10349,6 +10456,7 @@ impatiently
 impediment
 imperative
 imperfect
+impersonated
 impersonation
 impetuous
 implausible
@@ -10367,6 +10475,7 @@ imponderable
 importance
 important
 importer
+impossibility
 impossible
 impractical
 imprecise
@@ -10729,6 +10838,7 @@ internationalization
 internationalize
 internationalized
 internationalizing
+internationally
 internet
 internet-connected
 internet-explorer
@@ -10956,6 +11066,7 @@ java-specialist
 java-stream
 java2
 java2d
+java3d
 java8
 javaee
 javafx
@@ -11041,6 +11152,7 @@ jvm-based
 jwt
 kafka
 kanban
+kd-tree
 kde
 keep-alive
 keep-in-mind
@@ -11173,6 +11285,7 @@ leaders
 leadership
 leaf
 leaflet
+leakage
 leaky
 learnable
 learner
@@ -11339,6 +11452,7 @@ log4net
 logarithm
 logarithmic
 logarithms
+logfile
 logged
 logger
 loggin
@@ -11350,6 +11464,7 @@ login
 logistic
 logistical
 logistics
+logits
 loglevel
 logo
 logon
@@ -11444,6 +11559,7 @@ mail-security
 mailbox
 mailboxes
 mailing
+mails
 mailservice
 main
 mainframe
@@ -11496,6 +11612,7 @@ mappings
 mapreduce
 marathon
 margin
+margins
 mariadb
 markdown
 marker
@@ -11554,6 +11671,7 @@ maximal
 maximization
 maximizer
 maximum
+maximums
 maxpooling
 mbr
 md5
@@ -11594,6 +11712,7 @@ memmove
 memoization
 memorable
 memories
+memorizing
 memory
 memory-based
 memory-leaks
@@ -11796,6 +11915,7 @@ model-view-controller
 model-view-presenter
 model-view-view
 modeler
+modelers
 modelling
 models
 modem
@@ -11967,6 +12087,7 @@ multiplatform
 multiplayer
 multiple
 multiple-term
+multiples
 multiplexing
 multiplication
 multiplications
@@ -12347,6 +12468,7 @@ objectionable
 objections
 objective
 objective-c
+objectivec
 objectively
 objectives
 objects
@@ -12372,6 +12494,7 @@ obso
 obstacle
 obstacles
 obstructed
+obstructing
 obtainable
 obvious
 occasion
@@ -12700,6 +12823,7 @@ parent-child
 parentheses
 parenthesis
 parents
+parity
 parse-platform
 parser
 parsers
@@ -12839,6 +12963,7 @@ phenomena
 phenomenal
 phenomenon
 philosophical
+phishing
 phone
 phone's
 phones
@@ -12851,6 +12976,7 @@ photoshop
 php
 php's
 php-developer
+php5
 phpmyadmin
 phpstorm
 phpunit
@@ -12980,6 +13106,7 @@ populating
 population
 popup
 popupmenu
+popups
 pored
 portability
 portal
@@ -13114,6 +13241,7 @@ prefixing
 preliminary
 preload
 preloaded
+preloading
 premature
 premiere
 premium
@@ -13261,6 +13389,7 @@ projects
 proliferation
 prolog
 prologue
+prolongation
 prominence
 prominent
 promiscuous
@@ -13422,6 +13551,7 @@ quoting
 r's
 r-leaflet
 r-squared
+r-tree
 rabbitmq
 race
 races
@@ -13611,6 +13741,7 @@ rectifier
 recurrence
 recurrenced
 recurrent
+recurrently
 recursion
 recursive
 recursivity
@@ -13676,6 +13807,7 @@ refusal
 refusing
 reg
 regards
+regeneration
 regex
 regexp
 region
@@ -13706,6 +13838,7 @@ reimagined
 reimagining
 reimplementation
 reinforcement
+reinitialization
 reinitializing
 reinterpretation
 reintroduced
@@ -13793,6 +13926,7 @@ reposition
 repositioning
 repositories
 repository
+representability
 representable
 representation
 representational
@@ -14114,6 +14248,7 @@ scripted
 scripts
 scrollable
 scrollbar
+scrollbars
 scrolling
 scrum
 scrum-master
@@ -14266,6 +14401,7 @@ serializable
 serialization
 serializer
 serializing
+serially
 series
 serious
 server
@@ -14503,6 +14639,8 @@ smallest
 smalltalk
 smart
 smart-phones
+smartdevice
+smartdevices
 smarter
 smartest
 smartness
@@ -14591,6 +14729,7 @@ spatial
 spatially
 speaker
 speakers
+specflow
 special
 special-purpose
 specialist
@@ -14774,6 +14913,7 @@ storefront
 stories
 story
 storyboard
+storyboards
 straggling
 straight
 straight-forward
@@ -14827,6 +14967,7 @@ stubbing
 stubs
 students
 studio
+studio's
 studios
 stuff
 stumbling
@@ -14897,6 +15038,7 @@ submitting
 submodule
 submodules
 subnet
+subnets
 suboptimal
 subpage
 subpart
@@ -14941,11 +15083,14 @@ substrings
 substructure
 subsystem
 subsystems
+subtable
 subtasks
 subtitles
 subtle
 subtlety
 subtly
+subtotal
+subtotals
 subtraction
 subtree
 subtrees
@@ -15061,6 +15206,7 @@ symmetry
 sync
 synchronicity
 synchronization
+synchronizer
 synchronizing
 synchronous
 synchronously
@@ -15119,6 +15265,7 @@ tangent
 tangential
 tangentially
 tappable
+tapping
 taps
 tar
 tarball
@@ -15204,6 +15351,7 @@ ten
 tendency
 tension
 tensor
+tensor's
 tensorflow
 tensorflow's
 tensorflow.js
@@ -15338,6 +15486,7 @@ tiered
 tile
 tiles
 tiling
+tilt
 time
 time-based
 time-consuming
@@ -15556,6 +15705,7 @@ try-catch-finally
 tsql
 tunable
 tuning
+tunnel
 tuple
 tuples
 turbo
@@ -15647,6 +15797,7 @@ unbiased
 unbound
 unboxing
 unbranded
+unbreaking
 unbuffered
 uncached
 uncaught
@@ -15696,6 +15847,7 @@ underscores
 understandable
 understandably
 understated
+understatement
 understating
 undertaking
 underway
@@ -15867,6 +16019,7 @@ unreliable
 unresolvable
 unresponsive
 unrestricted
+unrevealed
 unrivaled
 unsafe
 unsatisfied
@@ -15874,7 +16027,9 @@ unsatisfying
 unsecure
 unseen
 unsegmented
+unselected
 unshared
+unsized
 unskilled
 unsmoothed
 unsolicited
@@ -15998,6 +16153,7 @@ user-supplied
 usercontrol
 userdata
 userdefined
+userform
 userfriendly
 usergroup
 username
@@ -16050,6 +16206,7 @@ vanishing
 var
 variability
 variable
+variable's
 variables
 variadic
 variance
@@ -16059,6 +16216,7 @@ variants
 variation
 variational
 variations
+varieties
 variety
 various
 variously
@@ -16305,6 +16463,7 @@ webmaster
 webmasters
 webp
 webpack
+webpacks
 webpage
 webpages
 webproduction
@@ -16480,6 +16639,7 @@ workspaces
 workstation
 workstations
 worktime
+worktree
 workweek
 world
 world's

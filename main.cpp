@@ -416,7 +416,7 @@ bool trim(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
    }
    else
    {
-      rtrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x003f\x002e\x002f");
+      rtrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x003f\x002e\x002f\x0040");
       ltrim(wstr, L"\x0022\x0027\x0028\x0029\x002d\x002a\x003a\x003b\x005b\x005d\x002b");
 
       //rtrim(wstr, L"\x0023\x0026\x0027\x0028\x0029\x002a\x002d\x002e\x002f\x003a\x003b\x003c\x003d\x003e\x003f\x005c\x007e\x00a9\x00ae\x005f");
@@ -1217,7 +1217,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 19 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 20 (c) Diixo]\n");
       if (argc == 1)
       {
          loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
