@@ -23,6 +23,10 @@ typedef unsigned int UInt32;
 
 std::map <wstring_t, size_t> maskedMap;
 
+std::map <wstring_t, size_t> stopsMap;
+std::map <wstring_t, size_t> dictMap;
+std::map <wstring_t, size_t> diixMap;
+
 // https://secure.n-able.com/webhelp/NC_9-1-0_SO_en/Content/SA_docs/API_Level_Integration/API_Integration_URLEncoding.html
 //////////////////////////////////////////////////////////////////////////
 
@@ -129,7 +133,12 @@ bool isApostrophe(const wchar_t ch)
       (ch == 0x0060) ||  // 96
       (ch == 0x0091) ||  // 145
       (ch == 0x00b4) ||  // 180 
-      (ch == 0x2019)     // 8217
+      (ch == 0x2019) ||  // 8217 
+
+      (ch == 0x02b9) ||  // 697
+      (ch == 0x02bb) ||  // 699
+      (ch == 0x02bc) ||  // 700
+      (ch == 0x02bd)     // 701 
       )
    {
       return true;
@@ -845,7 +854,14 @@ void splitString(const wchar_t* buff, std::list<std::list <wstring_t>*>& table)
             if (!s_new.empty())
             {
                //words.push_back(s_new);
-               table.back()->push_back(s_new);
+               if (stopsMap.find(s_new) == stopsMap.end())
+               {
+                  table.back()->push_back(s_new);
+               }
+               else
+               {
+                  table.push_back(new std::list <wstring_t>());
+               }
 
                if (s_new.size() != sz)
                {
@@ -877,9 +893,18 @@ void splitString(const wchar_t* buff, std::list<std::list <wstring_t>*>& table)
    {
       assert(sz > 0);
       wstring_t s_new(p_new, sz);
-      rtrim(s_new, RDelim);
+
       ltrim(s_new, LDelim);
       if (!s_new.empty())
+      {
+         if (s_new.size() != sz)
+         {
+            //words.push_back(STR_SEPARATOR);
+            table.push_back(new std::list <wstring_t>());
+         }
+      }
+      rtrim(s_new, RDelim);
+      if (!s_new.empty() && (stopsMap.find(s_new) == stopsMap.end()))
       {
          table.back()->push_back(s_new);
       }
@@ -1192,12 +1217,9 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 18 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 19 (c) Diixo]\n");
       if (argc == 1)
       {
-         std::map <wstring_t, size_t> dictMap;
-         std::map <wstring_t, size_t> diixMap;
-
          loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
          loadFile(wstring_t(L"diixonary.txt"), wstring_t(), diixMap);
          //loadFile_utf8("diixonary.txt", wstring_t(), filterMap, diixMap, wstring_t());
@@ -1214,6 +1236,7 @@ int main(int argc, char* argv[])
       if (argc == 2)
       {
          loadFile(wstring_t(L"db-full.txt"), wstring_t(), filterMap);
+         loadFile(wstring_t(L"db-stopwords.txt"), wstring_t(), stopsMap);
 
          const wstring_t mainFile = cstring_to_wstring(argv[1]);
 
