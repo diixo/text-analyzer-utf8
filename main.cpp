@@ -21,7 +21,7 @@
 typedef std::wstring wstring_t;
 typedef unsigned int UInt32;
 
-std::map <wstring_t, size_t> maskedMap;
+std::map <wstring_t, size_t> combinedMap;
 
 std::map <wstring_t, size_t> stopsMap;
 std::map <wstring_t, size_t> dictMap;
@@ -407,7 +407,7 @@ bool is_anydigit(const wstring_t& inStr, size_t start_id = 0)
 
 const wstring_t key(L"rvx_)(+-!?0123456789@;,.:#&%$*^'~/\\");
 
-bool trim(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
+bool trimWord(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
 {
    if ((wstr.size() == 1) && wcschr(ALLOWABLE, wstr.back()))
    {
@@ -439,7 +439,6 @@ bool trim(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
 
       if (skip || (tstr.length() <= 2))
       {
-         //it = outList.erase(it);
          return false;
       }
       else
@@ -448,15 +447,11 @@ bool trim(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
          {
             ltrim(wstr, L"#");
             ltrim(tstr, L"#");
-            //it = outList.erase(it);
             return false;
          }
          else
          {
-            //todo: isdigit, www, https
-            auto fit = filterMap.find(tstr);
-            if (fit != filterMap.end() ||
-               tstr == L"&#124" ||
+            if (tstr == L"&#124" ||
                tstr == L"&quot" ||
                tstr == L"&amp" ||
                tstr == L"nbsp" ||
@@ -540,7 +535,12 @@ bool trim(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
                (wcspbrk(tstr.c_str(), L":][=^{}") != 0)
                )
             {
-               //it = outList.erase(it);
+               return false;
+            }
+
+            auto fit = filterMap.find(tstr);
+            if (fit != filterMap.end())
+            {
                return false;
             }
             else
@@ -614,7 +614,6 @@ bool trim(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
                // check with splitting by mask: xx/xx/xx
                if (checkR > 0 || checkR < 0)
                {
-                  //it = outList.erase(it);
                   return false;
                }
                else
@@ -624,17 +623,15 @@ bool trim(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
                   // check with splitting by mask: xx-xx-xx
                   if (checkR > 0)
                   {
-                     auto itf = maskedMap.find(tstr);
-                     if (itf != maskedMap.end()) { itf->second++; }
-                     else { maskedMap[tstr] = 1; }
+                     auto itf = combinedMap.find(tstr);
+                     if (itf != combinedMap.end()) { itf->second++; }
+                     else { combinedMap[tstr] = 1; }
                      //////////////////////////////////////////////
-                     //it = outList.erase(it);
                      return false;
                   }
                   else if (checkR < 0)
                   {
                      // skip without adding to dictionary
-                     //it = outList.erase(it);
                      return false;
                   }
                   else
@@ -653,7 +650,7 @@ void trimming(const std::map <wstring_t, size_t>& filterMap, std::list <wstring_
 {
    for (std::list <wstring_t>::iterator it = outList.begin(); it != outList.end(); )
    {
-      if (trim(*it, filterMap))
+      if (trimWord(*it, filterMap))
       {
          ++it;
       }
@@ -1184,9 +1181,9 @@ void mapToFile(const wstring_t filepath, const std::map <wstring_t, size_t>& iMa
       }
    }
 
-   if (!maskedMap.empty())
+   if (!combinedMap.empty())
    {
-      for (auto itt = maskedMap.begin(); itt != maskedMap.end(); itt++)
+      for (auto itt = combinedMap.begin(); itt != combinedMap.end(); itt++)
       {
          fputws(&(itt->first[0]), pMaskedFile);
          fputwc(L' ', pMaskedFile);
@@ -1217,7 +1214,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 20 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 22 (c) Diixo]\n");
       if (argc == 1)
       {
          loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
