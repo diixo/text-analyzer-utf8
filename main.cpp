@@ -592,6 +592,7 @@ bool trimWord(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
 
                   for (auto itt = tmpList.begin(); itt != tmpList.end(); )
                   {
+                     ltrim(*itt, L"-");
                      if (is_digit(*itt))
                      {
                         return -1;
@@ -619,6 +620,7 @@ bool trimWord(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
                {
                   for (auto tt = tmpList.begin(); tt != tmpList.end(); )
                   {
+                     ltrim(*tt, L"-");
                      checkR = checkStrong(*tt, L"-");
                      if (checkR > 0)
                      {
@@ -1230,7 +1232,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 24 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 25 (c) Diixo]\n");
       if (argc == 1)
       {
          loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
