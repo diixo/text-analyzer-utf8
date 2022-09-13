@@ -546,30 +546,7 @@ bool trimWord(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
             else
             {
                //////////////////////////////////////////////////////////////////////////
-               auto check = [&filterMap, &tstr](const wchar_t* Delim)->int
-               {
-                  std::list<std::wstring> tmpList;
-                  wcstok(tstr, Delim, tmpList);
-
-                  for (auto itt = tmpList.begin(); itt != tmpList.end(); )
-                  {
-                     if (is_digit(*itt))
-                     {
-                        return -1;
-                     }
-                     else if (filterMap.find(*itt) != filterMap.end() || (itt->length() == 1))
-                     {
-                        itt = tmpList.erase(itt);
-                     }
-                     else
-                     {
-                        break;
-                     }
-                  }
-                  return (int)tmpList.empty();
-               };
-               //////////////////////////////////////////////////////////////////////////
-               auto checkStrong = [&filterMap, &tstr](const wchar_t* Delim)->int
+               auto checkStrong = [&filterMap](const wstring_t& tstr, const wchar_t* Delim)->int
                {
                   std::list<std::wstring> tmpList;
                   wcstok(tstr, Delim, tmpList);
@@ -608,17 +585,39 @@ bool trimWord(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
                   return (int)tmpList.empty();
                };
                //////////////////////////////////////////////////////////////////////////
+               std::list<std::wstring> tmpList;
+               auto check = [&filterMap, &tstr, &tmpList](const wchar_t* Delim)->int
+               {
+                  wcstok(tstr, Delim, tmpList);
+
+                  for (auto itt = tmpList.begin(); itt != tmpList.end(); )
+                  {
+                     if (is_digit(*itt))
+                     {
+                        return -1;
+                     }
+                     else if (filterMap.find(*itt) != filterMap.end() || (itt->length() == 1))
+                     {
+                        itt = tmpList.erase(itt);
+                     }
+                     else
+                     {
+                        break;
+                     }
+                  }
+                  return (int)(tmpList.size() > 0);
+               };
 
                int checkR = check(L"$~@_.()*?~%/\\");
 
                // check with splitting by mask: xx/xx/xx
-               if (checkR > 0 || checkR < 0)
+               if (checkR <= 0)
                {
                   return false;
                }
                else
                {
-                  checkR = checkStrong(L"-");
+                  checkR = checkStrong(tstr, L"-");
 
                   // check with splitting by mask: xx-xx-xx
                   if (checkR > 0)
@@ -1214,7 +1213,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 22 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 23 (c) Diixo]\n");
       if (argc == 1)
       {
          loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
