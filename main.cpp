@@ -617,15 +617,32 @@ bool trimWord(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
                }
                else
                {
-                  checkR = checkStrong(tstr, L"-");
+                  for (auto tt = tmpList.begin(); tt != tmpList.end(); )
+                  {
+                     checkR = checkStrong(*tt, L"-");
+                     if (checkR > 0)
+                     {
+                        auto itf = combinedMap.find(*tt);
+                        if (itf != combinedMap.end()) { itf->second++; }
+                        else { combinedMap[*tt] = 1; }
+
+                        tt = tmpList.erase(tt);
+                        checkR = tmpList.empty();
+                     }
+                     else if (checkR < 0)
+                     {
+                        break;
+                     }
+                     else
+                     {
+                        tt++;
+                        checkR = tmpList.empty();
+                     }
+                  }
 
                   // check with splitting by mask: xx-xx-xx
                   if (checkR > 0)
                   {
-                     auto itf = combinedMap.find(tstr);
-                     if (itf != combinedMap.end()) { itf->second++; }
-                     else { combinedMap[tstr] = 1; }
-                     //////////////////////////////////////////////
                      return false;
                   }
                   else if (checkR < 0)
@@ -1213,7 +1230,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 23 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 24 (c) Diixo]\n");
       if (argc == 1)
       {
          loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
