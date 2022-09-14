@@ -622,11 +622,15 @@ bool trimWord(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
                   {
                      ltrim(*tt, L"-");
                      checkR = checkStrong(*tt, L"-");
+
                      if (checkR > 0)
                      {
-                        auto itf = combinedMap.find(*tt);
-                        if (itf != combinedMap.end()) { itf->second++; }
-                        else { combinedMap[*tt] = 1; }
+                        if (wcschr(tt->c_str(), L'-') != NULL)
+                        {
+                           auto itf = combinedMap.find(*tt);
+                           if (itf != combinedMap.end()) { itf->second++; }
+                           else { combinedMap[*tt] = 1; }
+                        }
 
                         tt = tmpList.erase(tt);
                         checkR = tmpList.empty();
@@ -1232,7 +1236,7 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 25 (c) Diixo]\n");
+      wprintf(L"Text-analyzer [Version 26 (c) Diixo]\n");
       if (argc == 1)
       {
          loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
