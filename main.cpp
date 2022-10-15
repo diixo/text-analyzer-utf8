@@ -173,6 +173,14 @@ wchar_t translateChar(const wchar_t ch)
       {
 		  return ch;
       }
+      if ((ch >= 8220) && (ch <= 8223))
+      {
+         return 0x0022;
+      }
+      if (ch == 0xfeff) // check if UTF8-BOM is first symbol
+      {
+         return 0;
+      }
       return space;
    }
 
@@ -1005,7 +1013,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
       return;
    }
 
-   FILE *pOutput = (filename_out.length() > 0) ? _wfopen(filename_out.c_str(), L"w, ccs=UTF-16LE") : 0;
+   FILE *pOutput = (filename_out.length() > 0) ? _wfopen(filename_out.c_str(), L"w, ccs=UTF-8") : 0;
    //FILE *pOutputF = (filtered_out.length() > 0) ? _wfopen(filtered_out.c_str(), L"w, ccs=UTF-16LE") : 0;
    FILE *pOutputF = (filtered_out.length() > 0) ? _wfopen(filtered_out.c_str(), L"w, ccs=UTF-8") : 0;
    UInt32 lineNumber = 0;
@@ -1060,7 +1068,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
          // check if need to skip symbol.
          if (tch > 0)
          {
-            if (pOutput) fputwc(wch, pOutput);  //write original symbol
+            if (pOutput) fputwc(tch, pOutput);  //write original symbol
 
             *pBuff = tch;
             pBuff++;
@@ -1227,6 +1235,8 @@ int main(int argc, char* argv[])
    std::map <wstring_t, size_t> mainMap;
    std::map <wstring_t, size_t> filterMap;
 
+   wprintf(L"Text-analyzer [Version 28 (c) Diixo]\n");
+
    if (argc > 3)
    {
       report(mainMap, filterMap, filterMap, filterMap);
@@ -1236,7 +1246,6 @@ int main(int argc, char* argv[])
    }
    else
    {
-      wprintf(L"Text-analyzer [Version 26 (c) Diixo]\n");
       if (argc == 1)
       {
          loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
