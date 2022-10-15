@@ -1068,7 +1068,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
          // check if need to skip symbol.
          if (tch > 0)
          {
-            if (pOutput) fputwc(tch, pOutput);  //write original symbol
+            if (pOutput) fputwc(tch, pOutput);  //write modified symbol
 
             *pBuff = tch;
             pBuff++;
