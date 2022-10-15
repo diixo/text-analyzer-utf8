@@ -1093,7 +1093,7 @@ void loadFile_utf8(const char* filepath, const std::wstring& filename_out, const
 }
 
 
-void loadFile(const std::wstring& filename_in, const std::wstring& filename_out, std::map <wstring_t, size_t>& ioMap)
+void loadFile(const std::wstring& filename_in, std::map <wstring_t, size_t>& ioMap)
 {
    setlocale(LC_ALL, "Russian");
    //////////////////////////////////////////////////////////////////////////
@@ -1112,7 +1112,7 @@ void loadFile(const std::wstring& filename_in, const std::wstring& filename_out,
       wprintf(L"File: %s loaded\n", filename_in.c_str());
    }
 
-   FILE *pOutput = (filename_out.length() > 0) ? _wfopen(filename_out.c_str(), L"w, ccs=UTF-16LE") : 0;
+   //FILE *pOutput = (filename_out.length() > 0) ? _wfopen(filename_out.c_str(), L"w, ccs=UTF-16LE") : 0;
    UInt32 lineNumber = 0;
    /////////////////////////////////////////////////////////////////////////
 
@@ -1128,8 +1128,6 @@ void loadFile(const std::wstring& filename_in, const std::wstring& filename_out,
    {
       if (wch == L'\n')
       {
-         if (pOutput) fputwc(wch, pOutput);
-
          if (pBuff != buff)
          {
             *pBuff = 0;
@@ -1165,8 +1163,6 @@ void loadFile(const std::wstring& filename_in, const std::wstring& filename_out,
          // check if need to skip symbol.
          if (tch > 0)
          {
-            if (pOutput) fputwc(tch, pOutput);
-
             *pBuff = tch;
             pBuff++;
             str_sz++;
@@ -1175,7 +1171,6 @@ void loadFile(const std::wstring& filename_in, const std::wstring& filename_out,
    }
 
    fclose(pFile);
-   if (pOutput) fclose(pOutput);
 }
 
 
@@ -1235,7 +1230,7 @@ int main(int argc, char* argv[])
    std::map <wstring_t, size_t> mainMap;
    std::map <wstring_t, size_t> filterMap;
 
-   wprintf(L"Text-analyzer [Version 28 (c) Diixo]\n");
+   wprintf(L"Text-analyzer [Version 31 (c) Diixo]\n");
 
    if (argc > 3)
    {
@@ -1248,8 +1243,8 @@ int main(int argc, char* argv[])
    {
       if (argc == 1)
       {
-         loadFile(wstring_t(L"dictionary.txt"), wstring_t(), dictMap);
-         loadFile(wstring_t(L"diixonary.txt"), wstring_t(), diixMap);
+         loadFile(wstring_t(L"dictionary.txt"), dictMap);
+         loadFile(wstring_t(L"diixonary.txt"), diixMap);
          //loadFile_utf8("diixonary.txt", wstring_t(), filterMap, diixMap, wstring_t());
       }
       if (argc == 3)
@@ -1257,14 +1252,14 @@ int main(int argc, char* argv[])
          const wstring_t filterFile = cstring_to_wstring(argv[1]);
          const wstring_t mainFile = cstring_to_wstring(argv[2]);
 
-         loadFile(filterFile, wstring_t(), filterMap);
+         loadFile(filterFile, filterMap);
          loadFile_utf8(argv[2], mainFile + L".u16", filterMap, mainMap, mainFile + L"--filtered.u16");
          mapToFile(mainFile, mainMap, wstring_t());
       }
       if (argc == 2)
       {
-         loadFile(wstring_t(L"db-full.txt"), wstring_t(), filterMap);
-         loadFile(wstring_t(L"db-stopwords.txt"), wstring_t(), stopsMap);
+         loadFile(wstring_t(L"db-full.txt"), filterMap);
+         loadFile(wstring_t(L"db-stopwords.txt"), stopsMap);
 
          const wstring_t mainFile = cstring_to_wstring(argv[1]);
 
