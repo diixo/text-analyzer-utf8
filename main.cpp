@@ -1174,36 +1174,22 @@ void loadFile(const std::wstring& filename_in, std::map <wstring_t, size_t>& ioM
 }
 
 
-void mapToFile(const wstring_t filepath, const std::map <wstring_t, size_t>& iMap, const wstring_t title)
+void mapToFile(const wstring_t filepath, const std::map <wstring_t, size_t>& iMap)
 {
    FILE* pOutFile = _wfopen(wstring_t(filepath + L"--dictionary.dictionary").c_str(), L"w, ccs=UTF-16LE");
    FILE* pMaskedFile = _wfopen(wstring_t(filepath + L"--combine.dictionary").c_str(), L"w, ccs=UTF-8");
-
-   if (!title.empty())
-   {
-      const wstring_t prefix(L"###");
-      fputws(prefix.c_str(), pOutFile);
-      fputwc(L' ', pOutFile);
-      fputws(title.c_str(), pOutFile);
-      fputwc(L' ', pOutFile);
-      fputws(prefix.c_str(), pOutFile);
-      fputwc(L'\n', pOutFile);
-   }
 
    wstring_t str;
 
    for (std::map <wstring_t, size_t>::const_iterator it = iMap.begin(); it != iMap.end(); ++it)
    {
-      //if (it->second > 2)
-      {
-         fputws(&(it->first[0]), pOutFile);
-         fputwc(L' ', pOutFile);
+      fputws(&(it->first[0]), pOutFile);
 
-         str = std::to_wstring(it->second);
-         fputws(&(str[0]), pOutFile);
+      //fputwc(L' ', pOutFile);
+      //str = std::to_wstring(it->second);
+      //fputws(&(str[0]), pOutFile);
 
-         fputwc(L'\n', pOutFile);
-      }
+      fputwc(L'\n', pOutFile);
    }
 
    if (!combinedMap.empty())
@@ -1211,8 +1197,8 @@ void mapToFile(const wstring_t filepath, const std::map <wstring_t, size_t>& iMa
       for (auto itt = combinedMap.begin(); itt != combinedMap.end(); itt++)
       {
          fputws(&(itt->first[0]), pMaskedFile);
-         fputwc(L' ', pMaskedFile);
 
+         fputwc(L' ', pMaskedFile);
          str = std::to_wstring(itt->second);
          fputws(&(str[0]), pMaskedFile);
 
@@ -1243,9 +1229,10 @@ int main(int argc, char* argv[])
    {
       if (argc == 1)
       {
-         loadFile(wstring_t(L"dictionary.txt"), dictMap);
-         loadFile(wstring_t(L"diixonary.txt"), diixMap);
-         //loadFile_utf8("diixonary.txt", wstring_t(), filterMap, diixMap, wstring_t());
+         //loadFile(wstring_t(L"dictionary.txt"), dictMap);
+         //loadFile(wstring_t(L"diixonary.txt"), diixMap);
+         //loadFile(wstring_t(L"db-stopwords.txt"), diixMap);
+         //mapToFile(L"db-stopwords.txt", diixMap);
       }
       if (argc == 3)
       {
@@ -1254,7 +1241,7 @@ int main(int argc, char* argv[])
 
          loadFile(filterFile, filterMap);
          loadFile_utf8(argv[2], mainFile + L".u16", filterMap, mainMap, mainFile + L"--filtered.u16");
-         mapToFile(mainFile, mainMap, wstring_t());
+         mapToFile(mainFile, mainMap);
       }
       if (argc == 2)
       {
@@ -1264,7 +1251,7 @@ int main(int argc, char* argv[])
          const wstring_t mainFile = cstring_to_wstring(argv[1]);
 
          loadFile_utf8(argv[1], mainFile + L".txt", filterMap, mainMap, mainFile + L"--filtered.u16");
-         mapToFile(mainFile, mainMap, wstring_t());
+         mapToFile(mainFile, mainMap);
 
          //report(mainMap, cmpMap, diffMap, resultMap);
       }
