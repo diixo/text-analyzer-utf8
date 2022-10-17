@@ -157,8 +157,8 @@ wchar_t translateChar(const wchar_t ch)
 
    if ((ch >= 0x0041) && (ch <= 0x005a)) // check latin symbols
    {
-      return ch;
-      //return towlower(ch);
+      //return ch;
+      return towlower(ch);
    }
 
    if (isApostrophe(ch))
@@ -1263,7 +1263,7 @@ int main(int argc, char* argv[])
 
          const wstring_t mainFile = cstring_to_wstring(argv[1]);
 
-         loadFile_utf8(argv[1], mainFile + L".u16", filterMap, mainMap, mainFile + L"--filtered.u16");
+         loadFile_utf8(argv[1], mainFile + L".txt", filterMap, mainMap, mainFile + L"--filtered.u16");
          mapToFile(mainFile, mainMap, wstring_t());
 
          //report(mainMap, cmpMap, diffMap, resultMap);
