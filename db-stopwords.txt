@@ -117,6 +117,7 @@ each-other
 either
 else
 else's
+elsewhere
 endlessly
 enough
 entirely
@@ -168,6 +169,7 @@ he
 he'd
 he'll
 he's
+hello
 hence
 her
 here
@@ -195,6 +197,7 @@ i'll
 i'm
 i've
 i.e
+i.g
 ideally
 ie
 if
@@ -250,6 +253,7 @@ moreover
 most
 mostly
 much
+must
 mustn't
 my
 myself
