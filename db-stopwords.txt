@@ -342,6 +342,7 @@ self
 selves
 several
 shall
+shan't
 she
 she'd
 she'll
@@ -373,6 +374,9 @@ such
 suchlike
 sure
 than
+thank
+thanks
+thanx
 that
 that'd
 that'll
@@ -386,6 +390,7 @@ them
 themself
 themselves
 then
+thence
 there
 there'll
 there're
