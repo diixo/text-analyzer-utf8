@@ -58,6 +58,7 @@ aren't
 around
 as
 aside
+assuredly
 at
 away
 back
@@ -234,6 +235,7 @@ likely
 likewise
 lot
 mainly
+manner
 many
 may
 maybe
@@ -257,6 +259,7 @@ must
 mustn't
 my
 myself
+naturally
 near
 nearby
 nearly
@@ -293,6 +296,7 @@ oneself
 only
 onto
 onward
+oops
 or
 ostensibly
 other
@@ -373,6 +377,7 @@ still
 such
 suchlike
 sure
+surely
 than
 thank
 thanks
