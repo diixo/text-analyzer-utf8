@@ -465,7 +465,7 @@ bool trimWord(wstring_t& wstr, const std::map <wstring_t, size_t>& filterMap)
                tstr == L"nbsp" ||
                tstr == L"&lt" ||
                tstr == L"&gt" ||
-               tstr.length() == 1 ||
+               tstr.length() < 2 ||
                tstr.find(L"http") != std::string::npos ||
                tstr.find(L"java.") != std::string::npos ||
                tstr.find(L"com.") != std::string::npos ||
@@ -715,7 +715,7 @@ void appendToMap(const std::list <wstring_t>& inList, std::map <wstring_t, size_
             wcschr(str.c_str(), L'&') ||
             wcschr(str.c_str(), L'%') ||
             wcschr(str.c_str(), L'_') ||
-            wcschr(str.c_str(), L'.') ||
+            //wcschr(str.c_str(), L'.') ||
             wcschr(str.c_str(), L'>') ||
             wcschr(str.c_str(), L'<') ||
             wcschr(str.c_str(), L'=') ||
@@ -1176,7 +1176,7 @@ void loadFile(const std::wstring& filename_in, std::map <wstring_t, size_t>& ioM
 
 void mapToFile(const wstring_t filepath, const std::map <wstring_t, size_t>& iMap)
 {
-   FILE* pOutFile = _wfopen(wstring_t(filepath + L"--dictionary.dictionary").c_str(), L"w, ccs=UTF-16LE");
+   FILE* pOutFile = _wfopen(wstring_t(filepath + L"--dictionary.dictionary").c_str(), L"w, ccs=UTF-8");
    FILE* pMaskedFile = _wfopen(wstring_t(filepath + L"--combine.dictionary").c_str(), L"w, ccs=UTF-8");
 
    wstring_t str;
@@ -1198,9 +1198,9 @@ void mapToFile(const wstring_t filepath, const std::map <wstring_t, size_t>& iMa
       {
          fputws(&(itt->first[0]), pMaskedFile);
 
-         fputwc(L' ', pMaskedFile);
-         str = std::to_wstring(itt->second);
-         fputws(&(str[0]), pMaskedFile);
+         //fputwc(L' ', pMaskedFile);
+         //str = std::to_wstring(itt->second);
+         //fputws(&(str[0]), pMaskedFile);
 
          fputwc(L'\n', pMaskedFile);
       }
@@ -1240,7 +1240,7 @@ int main(int argc, char* argv[])
          const wstring_t mainFile = cstring_to_wstring(argv[2]);
 
          loadFile(filterFile, filterMap);
-         loadFile_utf8(argv[2], mainFile + L".u16", filterMap, mainMap, mainFile + L"--filtered.u16");
+         loadFile_utf8(argv[2], mainFile + L".uu8", filterMap, mainMap, mainFile + L"--filtered.uu8");
          mapToFile(mainFile, mainMap);
       }
       if (argc == 2)
@@ -1250,7 +1250,7 @@ int main(int argc, char* argv[])
 
          const wstring_t mainFile = cstring_to_wstring(argv[1]);
 
-         loadFile_utf8(argv[1], mainFile + L".txt", filterMap, mainMap, mainFile + L"--filtered.u16");
+         loadFile_utf8(argv[1], mainFile + L".txt", filterMap, mainMap, mainFile + L"--filtered.uu8");
          mapToFile(mainFile, mainMap);
 
          //report(mainMap, cmpMap, diffMap, resultMap);

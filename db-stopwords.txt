@@ -285,6 +285,8 @@ normally
 not
 nothing
 now
+nowaday
+nowadays
 nowhere
 obviously
 of
@@ -432,6 +434,7 @@ thus
 till
 to
 today
+todays
 together
 tomorrow
 too
