@@ -115,6 +115,7 @@ due
 during
 each
 each-other
+easily
 either
 else
 else's
@@ -221,6 +222,7 @@ itself
 just
 largely
 last
+lastly
 late
 lately
 later
@@ -263,6 +265,9 @@ naturally
 near
 nearby
 nearly
+need
+needed
+needs
 neither
 never
 nevertheless
@@ -376,6 +381,7 @@ sooner
 still
 such
 suchlike
+supposedly
 sure
 surely
 than
